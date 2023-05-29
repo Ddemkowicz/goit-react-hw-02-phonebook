@@ -2,20 +2,23 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 export default class ContactList extends Component {
-  handleDeleteClick = () => {
-    const { contact, handleContactDelete } = this.props;
-    handleContactDelete(contact.id);
+  handleDeleteClick = contactId => {
+    const { handleContactDelete } = this.props;
+    handleContactDelete(contactId);
   };
 
   render() {
-    const { filteredContacts, handleDeleteClick } = this.props;
+    const { filteredContacts } = this.props;
 
     return (
       <ul>
         {filteredContacts.map(contact => (
           <li key={contact.id}>
             {contact.name} : {contact.number}
-            <button onClick={handleDeleteClick} type="button">
+            <button
+              onClick={() => this.handleDeleteClick(contact.id)}
+              type="button"
+            >
               Delete
             </button>
           </li>
